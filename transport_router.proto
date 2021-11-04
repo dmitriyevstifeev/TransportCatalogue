@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+import "graph.proto";
+
+package transport_catalogue_serialize;
+
+message RoutingSettings {
+  uint32 bus_wait_time = 1;
+  double bus_velocity = 2;
+}
+
+message RID {
+  double weight = 1;
+  int32 prev_edge_id = 2;
+}
+
+message optionalRID {
+  RID rid_value = 1;
+  bool no_value = 2;
+}
+
+message RoutesInternalData{
+  repeated optionalRID optional_rid = 1;
+}
+
+message ReverseDataForGraph {
+  uint32 stop_id = 1;
+  uint32 reversed_stop_id = 2;
+}
+
+message TransportRouter {
+  repeated ReverseDataForGraph reversed_data_for_graph = 1;
+  Graph graph = 2;
+  repeated RoutesInternalData routes_internal_data = 3;
+}
